@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { containerVariants, whileHover } from "./animation/variants";
 const Toppings = ({ addTopping, pizza }) => {
   let toppings = [
     "mushrooms",
@@ -13,7 +13,12 @@ const Toppings = ({ addTopping, pizza }) => {
   ];
 
   return (
-    <div className="toppings container">
+    <motion.div
+      className="toppings container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <h3>Step 2: Choose Toppings</h3>
       <ul>
         {toppings.map((topping) => {
@@ -22,12 +27,7 @@ const Toppings = ({ addTopping, pizza }) => {
             <motion.li
               key={topping}
               onClick={() => addTopping(topping)}
-              whileHover={{
-                scale: 1.3,
-                color: "#f8e112",
-                fontWeight: "bold",
-                originX: 0,
-              }}
+              whileHover={whileHover}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <span className={spanClass}>{topping}</span>
@@ -47,7 +47,7 @@ const Toppings = ({ addTopping, pizza }) => {
           Order
         </motion.button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

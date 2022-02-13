@@ -1,12 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import {
+  containerVariants,
+  nextVariants,
+  whileHover,
+} from "./animation/variants";
 
 const Base = ({ addBase, pizza }) => {
   const bases = ["Classic", "Thin & Crispy", "Thick Crust"];
 
   return (
-    <div className="base container">
+    <motion.div
+      className="base container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <h3>Step 1: Choose Your Base</h3>
       <ul>
         {bases.map((base) => {
@@ -20,25 +30,13 @@ const Base = ({ addBase, pizza }) => {
       </ul>
 
       {pizza.base && (
-        <motion.div
-          initial={{ x: "-100vw" }}
-          animate={{ x: 0 }}
-          className="next"
-        >
+        <motion.div className="next" variants={nextVariants}>
           <Link to="/toppings">
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                textShadow: "0px 0px 8px rgb(225, 225, 225)",
-                boxShadow: "0px 0px 8px rgb(225, 225, 225)",
-              }}
-            >
-              Next
-            </motion.button>
+            <motion.button whileHover>Next</motion.button>
           </Link>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
